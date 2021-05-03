@@ -1,0 +1,304 @@
+{
+  "guild": {
+    "id": "635865020172861441",
+    "name": "Polygon (previously Matic)",
+    "iconUrl": "https://cdn.discordapp.com/icons/635865020172861441/9db7093dbc29c43b9e6177269a416648.png"
+  },
+  "channel": {
+    "id": "717384861647896616",
+    "type": "GuildTextChat",
+    "categoryId": "717384801778401300",
+    "category": "Developers",
+    "name": "queries",
+    "topic": null
+  },
+  "dateRange": {
+    "after": null,
+    "before": null
+  },
+  "messages": [
+    {
+      "id": "838223767431413850",
+      "type": "Reply",
+      "timestamp": "2021-05-02T01:21:59.6+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "I was contacted by that person too. That person later deleted their texts",
+      "author": {
+        "id": "819613826659385365",
+        "name": "rodeogenius",
+        "discriminator": "7403",
+        "nickname": "rodeogenius",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/819613826659385365/5287a65fe84db9b829bd393a0df6a9a4.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": [
+        {
+          "id": "712863455467667526",
+          "name": "AlgoRhythm",
+          "discriminator": "2931",
+          "nickname": "AlgoRhythm | Vault Staking",
+          "isBot": false
+        }
+      ],
+      "reference": {
+        "messageId": "838223418775961601",
+        "channelId": "717384861647896616",
+        "guildId": "635865020172861441"
+      }
+    },
+    {
+      "id": "838227529298870292",
+      "type": "Default",
+      "timestamp": "2021-05-02T01:36:56.499+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "so were are SOL if we run out of matic to do txns? just have to bridge more over?",
+      "author": {
+        "id": "808228342377480203",
+        "name": "Dionysus",
+        "discriminator": "4557",
+        "nickname": "Dionysus",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/embed/avatars/2.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "838232509845602334",
+      "type": "Default",
+      "timestamp": "2021-05-02T01:56:43.954+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "So algorithm here is legit guys is he a mod?",
+      "author": {
+        "id": "754045901777010839",
+        "name": "mazza",
+        "discriminator": "5029",
+        "nickname": "mazza",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/embed/avatars/4.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "838232896846299156",
+      "type": "Reply",
+      "timestamp": "2021-05-02T01:58:16.222+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "Not that you should run out on purpose, but if you do, sometimes people are nice enough to send a fraction of a Matic so you can buy more (then usually nice to send them back what they sent you).",
+      "author": {
+        "id": "712863455467667526",
+        "name": "AlgoRhythm",
+        "discriminator": "2931",
+        "nickname": "AlgoRhythm | Vault Staking",
+        "color": "#E74C3C",
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/712863455467667526/51049f12dda09ce0e83dc49e7e2cca37.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": [
+        {
+          "id": "808228342377480203",
+          "name": "Dionysus",
+          "discriminator": "4557",
+          "nickname": "Dionysus",
+          "isBot": false
+        }
+      ],
+      "reference": {
+        "messageId": "838227529298870292",
+        "channelId": "717384861647896616",
+        "guildId": "635865020172861441"
+      }
+    },
+    {
+      "id": "838233219249340426",
+      "type": "Reply",
+      "timestamp": "2021-05-02T01:59:33.089+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "thank you. if there is such a kind soul i will be happy to repay \uD83D\uDE4F",
+      "author": {
+        "id": "808228342377480203",
+        "name": "Dionysus",
+        "discriminator": "4557",
+        "nickname": "Dionysus",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/embed/avatars/2.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": [
+        {
+          "id": "712863455467667526",
+          "name": "AlgoRhythm",
+          "discriminator": "2931",
+          "nickname": "AlgoRhythm | Vault Staking",
+          "isBot": false
+        }
+      ],
+      "reference": {
+        "messageId": "838232896846299156",
+        "channelId": "717384861647896616",
+        "guildId": "635865020172861441"
+      }
+    },
+    {
+      "id": "838233351571505215",
+      "type": "Reply",
+      "timestamp": "2021-05-02T02:00:04.637+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "@Stake | StakePool and I are mods, and pretty much anyone with a Validator role aren't here to cause trouble. Having said that, if somethings seems off, feel free to question the person before agreeing to do what they ask.",
+      "author": {
+        "id": "712863455467667526",
+        "name": "AlgoRhythm",
+        "discriminator": "2931",
+        "nickname": "AlgoRhythm | Vault Staking",
+        "color": "#E74C3C",
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/712863455467667526/51049f12dda09ce0e83dc49e7e2cca37.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": [
+        {
+          "id": "675037249385267221",
+          "name": "Stake | StakePool",
+          "discriminator": "9899",
+          "nickname": "Stake | StakePool",
+          "isBot": false
+        },
+        {
+          "id": "754045901777010839",
+          "name": "mazza",
+          "discriminator": "5029",
+          "nickname": "mazza",
+          "isBot": false
+        }
+      ],
+      "reference": {
+        "messageId": "838232509845602334",
+        "channelId": "717384861647896616",
+        "guildId": "635865020172861441"
+      }
+    },
+    {
+      "id": "838233572787224606",
+      "type": "Reply",
+      "timestamp": "2021-05-02T02:00:57.379+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "on that note, our matic address is supposed to match our ethereum address. correcT? it's just the network it's sent on that makes it such?",
+      "author": {
+        "id": "808228342377480203",
+        "name": "Dionysus",
+        "discriminator": "4557",
+        "nickname": "Dionysus",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/embed/avatars/2.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": [
+        {
+          "id": "712863455467667526",
+          "name": "AlgoRhythm",
+          "discriminator": "2931",
+          "nickname": "AlgoRhythm | Vault Staking",
+          "isBot": false
+        }
+      ],
+      "reference": {
+        "messageId": "838232896846299156",
+        "channelId": "717384861647896616",
+        "guildId": "635865020172861441"
+      }
+    },
+    {
+      "id": "838233674041786408",
+      "type": "Reply",
+      "timestamp": "2021-05-02T02:01:21.52+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "Haha, I thought it was a hypothetical question. Sure, DM me your address.",
+      "author": {
+        "id": "712863455467667526",
+        "name": "AlgoRhythm",
+        "discriminator": "2931",
+        "nickname": "AlgoRhythm | Vault Staking",
+        "color": "#E74C3C",
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/712863455467667526/51049f12dda09ce0e83dc49e7e2cca37.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": [
+        {
+          "id": "808228342377480203",
+          "name": "Dionysus",
+          "discriminator": "4557",
+          "nickname": "Dionysus",
+          "isBot": false
+        }
+      ],
+      "reference": {
+        "messageId": "838233219249340426",
+        "channelId": "717384861647896616",
+        "guildId": "635865020172861441"
+      }
+    },
+    {
+      "id": "838233807240691782",
+      "type": "Default",
+      "timestamp": "2021-05-02T02:01:53.277+00:00",
+      "timestampEdited": "2021-05-02T02:02:23.395+00:00",
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "Yes, Matic/Ethereum/BSC/probably others all use the same address, the routing occurs on the network.",
+      "author": {
+        "id": "712863455467667526",
+        "name": "AlgoRhythm",
+        "discriminator": "2931",
+        "nickname": "AlgoRhythm | Vault Staking",
+        "color": "#E74C3C",
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/712863455467667526/51049f12dda09ce0e83dc49e7e2cca37.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": []
+    }
+  ]
+}
