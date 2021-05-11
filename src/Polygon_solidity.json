@@ -1,0 +1,3008 @@
+{
+  "guild": {
+    "id": "635865020172861441",
+    "name": "Polygon (previously Matic)",
+    "iconUrl": "https://cdn.discordapp.com/icons/635865020172861441/9db7093dbc29c43b9e6177269a416648.png"
+  },
+  "channel": {
+    "id": "781758240320389130",
+    "type": "GuildTextChat",
+    "categoryId": "725319228093235240",
+    "category": "internal",
+    "name": "solidity",
+    "topic": null
+  },
+  "dateRange": {
+    "after": null,
+    "before": null
+  },
+  "messages": [
+    {
+      "id": "781834521959202826",
+      "type": "Default",
+      "timestamp": "2020-11-27T10:51:15.818+00:00",
+      "timestampEdited": "2020-11-27T10:55:00.968+00:00",
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "Thank you, awesome!\n\nSo, first question about ERC1155.\n I would like to allow my users to send an ERC1155 id to several addresses at the same time (with an amount to be specified by addresses)\n\nthe \"quick and easy way\" would be to do something like this:\n\n```js\n    /**\n     * @dev allows to transfer one id to several address \n     */\n    function safeBatchTransferIdFrom(\n        address from,\n        address[] memory tos,\n        uint256 id,\n        uint256[] memory amounts,\n        bytes memory data\n    ) public virtual {\n        require(\n            tos.length == amounts.length,\n            \"ERC1155: recipients and amounts length mismatch\"\n        );\n\n        for (uint256 i = 0; i < tos.length; i++) {\n            safeTransferFrom(from, tos[i], id, amounts[i], data);\n        }\n    }\n```\n\nthis is clearly not optimized, as it would emit a TransferSingle (and do all the safeTransferFrom verification) for every recipient.\nBut that would still cost less than doing 10 separate transactions if i'm not mistaken. And on Matic the cost is almost negligeable.\n\nAny thoughts?",
+      "author": {
+        "id": "410568850283823105",
+        "name": "dievardump",
+        "discriminator": "0964",
+        "nickname": "dievardump",
+        "color": "#2ECC71",
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/410568850283823105/2c1bfbfedc9059a23708a6f6ef6969d7.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "781966713608601621",
+      "type": "Default",
+      "timestamp": "2020-11-27T19:36:32.763+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "I don't think there's a better way. The only piece of `safeTransferFrom` verification you could skip is checking the approval of the `from` address so it wouldn't save you that much. Trying to emit a single event with an array of recipients wouldn't be great as you wouldn't be able to filter for a particular address.\n\nFair amount of downside for very little upside (which is offset by cheap gas prices)",
+      "author": {
+        "id": "196722506676174848",
+        "name": "Tom French",
+        "discriminator": "3331",
+        "nickname": "Tom French",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/196722506676174848/76c6b9b0901de0374c27f3d4ac2a9a42.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "781986838524198962",
+      "type": "Default",
+      "timestamp": "2020-11-27T20:56:30.917+00:00",
+      "timestampEdited": "2020-11-27T20:56:39.599+00:00",
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": ">  Trying to emit a single event with an array of recipients wouldn't be great as you wouldn't be able to filter for a particular address.\n\nI also wouldn't do that as it is not standard and other dapps wouldn't catch the transfers",
+      "author": {
+        "id": "410568850283823105",
+        "name": "dievardump",
+        "discriminator": "0964",
+        "nickname": "dievardump",
+        "color": "#2ECC71",
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/410568850283823105/2c1bfbfedc9059a23708a6f6ef6969d7.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "782189901348470785",
+      "type": "Default",
+      "timestamp": "2020-11-28T10:23:24.867+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "Hi, I'm à  little newbie here \uD83D\uDE09, \n\nIn order to build and to create a new token in Matic ecosystem, solidity is the only one langage ? I mean, is it exactly the same to code on ethereum and to code on Matic ? Thanx",
+      "author": {
+        "id": "782151728632037389",
+        "name": "sandbox",
+        "discriminator": "4145",
+        "nickname": "sandbox",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/embed/avatars/0.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "782198484778090536",
+      "type": "Default",
+      "timestamp": "2020-11-28T10:57:31.316+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "@sandbox you need to create a SmartContract. so any of those would do: https://ethereum.org/en/developers/docs/smart-contracts/languages/",
+      "author": {
+        "id": "410568850283823105",
+        "name": "dievardump",
+        "discriminator": "0964",
+        "nickname": "dievardump",
+        "color": "#2ECC71",
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/410568850283823105/2c1bfbfedc9059a23708a6f6ef6969d7.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": [
+        {
+          "id": "782151728632037389",
+          "name": "sandbox",
+          "discriminator": "4145",
+          "nickname": "sandbox",
+          "isBot": false
+        }
+      ]
+    },
+    {
+      "id": "782311747298132051",
+      "type": "Default",
+      "timestamp": "2020-11-28T18:27:35.205+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "Thanks \uD83D\uDC4D",
+      "author": {
+        "id": "782151728632037389",
+        "name": "sandbox",
+        "discriminator": "4145",
+        "nickname": "sandbox",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/embed/avatars/0.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "786621801387130880",
+      "type": "Reply",
+      "timestamp": "2020-12-10T15:54:12.177+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "It is 100% the same",
+      "author": {
+        "id": "401886415820029952",
+        "name": "icinsight",
+        "discriminator": "7580",
+        "nickname": "icinsight",
+        "color": "#2ECC71",
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/401886415820029952/b0a284110fe06afacb004e800ac28b0c.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": [
+        {
+          "id": "782151728632037389",
+          "name": "sandbox",
+          "discriminator": "4145",
+          "nickname": "sandbox",
+          "isBot": false
+        }
+      ],
+      "reference": {
+        "messageId": "782189901348470785",
+        "channelId": "781758240320389130",
+        "guildId": "635865020172861441"
+      }
+    },
+    {
+      "id": "793444071276150784",
+      "type": "Default",
+      "timestamp": "2020-12-29T11:43:28.07+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "Hello everyone",
+      "author": {
+        "id": "443454213935071252",
+        "name": "asmit",
+        "discriminator": "4053",
+        "nickname": "asmit",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/embed/avatars/3.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "793444276410646538",
+      "type": "Default",
+      "timestamp": "2020-12-29T11:44:16.978+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "I am trying to deploy a contract basically it's nft,",
+      "author": {
+        "id": "443454213935071252",
+        "name": "asmit",
+        "discriminator": "4053",
+        "nickname": "asmit",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/embed/avatars/3.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "793444339535183912",
+      "type": "Default",
+      "timestamp": "2020-12-29T11:44:32.028+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "and a nft sale marketplace solidity contract",
+      "author": {
+        "id": "443454213935071252",
+        "name": "asmit",
+        "discriminator": "4053",
+        "nickname": "asmit",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/embed/avatars/3.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "793444401749295154",
+      "type": "Default",
+      "timestamp": "2020-12-29T11:44:46.861+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "it just compiles fine",
+      "author": {
+        "id": "443454213935071252",
+        "name": "asmit",
+        "discriminator": "4053",
+        "nickname": "asmit",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/embed/avatars/3.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "793444507475247134",
+      "type": "Default",
+      "timestamp": "2020-12-29T11:45:12.068+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "const HDWalletProvider = require('truffle-hdwallet-provider');\n// const fs = require('fs');\n\nmodule.exports = {\n  networks: {\n    matic: {\n      provider: () => new HDWalletProvider(mnemonic, `https://rpc-mumbai.matic.today`),\n      network_id: 80001,\n      confirmations: 2,\n      gasPrice: '1000000000',\n      timeoutBlocks: 200,\n      skipDryRun: true,\n    },\n  },\n\n  // Set default mocha options here, use special reporters etc.\n  mocha: {\n    // timeout: 100000\n  },\n\n  // Configure your compilers\n  compilers: {\n    solc: {\n    }\n  },\n  contracts_directory: './contracts/',\n  contracts_build_directory: './build/contracts/',\n}",
+      "author": {
+        "id": "443454213935071252",
+        "name": "asmit",
+        "discriminator": "4053",
+        "nickname": "asmit",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/embed/avatars/3.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "793444638052057109",
+      "type": "Default",
+      "timestamp": "2020-12-29T11:45:43.2+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "here is the config file that i am using",
+      "author": {
+        "id": "443454213935071252",
+        "name": "asmit",
+        "discriminator": "4053",
+        "nickname": "asmit",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/embed/avatars/3.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "793444844142854154",
+      "type": "Default",
+      "timestamp": "2020-12-29T11:46:32.336+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "https://explorer-mumbai.maticvigil.com/tx/0x58d9edec5b3edc9ebdc6e961dcdcf30639230f92539d42234aa551b2d5031cbf/internal-transactions",
+      "author": {
+        "id": "443454213935071252",
+        "name": "asmit",
+        "discriminator": "4053",
+        "nickname": "asmit",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/embed/avatars/3.png"
+      },
+      "attachments": [],
+      "embeds": [
+        {
+          "title": "Transaction 0x58d9edec5b3edc9ebdc6e961dcdcf30639230f92539d42234aa5...",
+          "url": "https://explorer-mumbai.maticvigil.com/tx/0x58d9edec5b3edc9ebdc6e961dcdcf30639230f92539d42234aa551b2d5031cbf/internal-transactions",
+          "timestamp": null,
+          "description": "View transaction 0x58d9edec5b3edc9ebdc6e961dcdcf30639230f92539d42234aa551b2d5031cbf on Mumbai",
+          "color": "#FFFFFF",
+          "fields": []
+        }
+      ],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "793446352049799168",
+      "type": "Default",
+      "timestamp": "2020-12-29T11:52:31.849+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "here is the code for nft",
+      "author": {
+        "id": "443454213935071252",
+        "name": "asmit",
+        "discriminator": "4053",
+        "nickname": "asmit",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/embed/avatars/3.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "793446369846755328",
+      "type": "Default",
+      "timestamp": "2020-12-29T11:52:36.092+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "pragma solidity >=0.4.21 <0.6.0;\n\nimport \"@openzeppelin/contracts/token/ERC721/ERC721Full.sol\";\nimport \"@openzeppelin/contracts/token/ERC721/ERC721Mintable.sol\";\n\ncontract HRC721 is ERC721Full, ERC721Mintable {    \n    constructor(string memory _name, string memory _symbol) ERC721Full(_name, _symbol) public {}\n\n    function mintWithTokenID(address to, string calldata uri) external {\n        uint256 tokenID = totalSupply() + 1;\n        _mint(to, tokenID);\n        _setTokenURI(tokenID, uri);\n    }\n}",
+      "author": {
+        "id": "443454213935071252",
+        "name": "asmit",
+        "discriminator": "4053",
+        "nickname": "asmit",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/embed/avatars/3.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "793446900379942923",
+      "type": "Default",
+      "timestamp": "2020-12-29T11:54:42.581+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "@dievardump can you please look into it",
+      "author": {
+        "id": "443454213935071252",
+        "name": "asmit",
+        "discriminator": "4053",
+        "nickname": "asmit",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/embed/avatars/3.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": [
+        {
+          "id": "410568850283823105",
+          "name": "dievardump",
+          "discriminator": "0964",
+          "nickname": "dievardump",
+          "isBot": false
+        }
+      ]
+    },
+    {
+      "id": "793447813849153546",
+      "type": "Default",
+      "timestamp": "2020-12-29T11:58:20.369+00:00",
+      "timestampEdited": "2020-12-29T11:58:29.78+00:00",
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "Is there a specific reason why you are not using the latest version of OZ contracts? (I'll look)",
+      "author": {
+        "id": "410568850283823105",
+        "name": "dievardump",
+        "discriminator": "0964",
+        "nickname": "dievardump",
+        "color": "#2ECC71",
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/410568850283823105/2c1bfbfedc9059a23708a6f6ef6969d7.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "793447918421016596",
+      "type": "Default",
+      "timestamp": "2020-12-29T11:58:45.301+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "there is another sc also",
+      "author": {
+        "id": "443454213935071252",
+        "name": "asmit",
+        "discriminator": "4053",
+        "nickname": "asmit",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/embed/avatars/3.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "793448015507226625",
+      "type": "Default",
+      "timestamp": "2020-12-29T11:59:08.448+00:00",
+      "timestampEdited": "2020-12-29T11:59:19.143+00:00",
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "What do you mean? You can change the compiler in truffle and it works perfectly",
+      "author": {
+        "id": "410568850283823105",
+        "name": "dievardump",
+        "discriminator": "0964",
+        "nickname": "dievardump",
+        "color": "#2ECC71",
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/410568850283823105/2c1bfbfedc9059a23708a6f6ef6969d7.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "793448167190298625",
+      "type": "Default",
+      "timestamp": "2020-12-29T11:59:44.612+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "// Configure your compilers\n  compilers: {\n    solc: {\n      version: '^0.6.12', // Fetch exact version from solc-bin (default: truffle's version)\n      optimizer: {\n        enabled: true,\n        runs: 200,\n      },\n    },\n  },",
+      "author": {
+        "id": "410568850283823105",
+        "name": "dievardump",
+        "discriminator": "0964",
+        "nickname": "dievardump",
+        "color": "#2ECC71",
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/410568850283823105/2c1bfbfedc9059a23708a6f6ef6969d7.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "793448225981464616",
+      "type": "Default",
+      "timestamp": "2020-12-29T11:59:58.629+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "then you can use the latest contracts",
+      "author": {
+        "id": "410568850283823105",
+        "name": "dievardump",
+        "discriminator": "0964",
+        "nickname": "dievardump",
+        "color": "#2ECC71",
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/410568850283823105/2c1bfbfedc9059a23708a6f6ef6969d7.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "793448472375984139",
+      "type": "Default",
+      "timestamp": "2020-12-29T12:00:57.374+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "(you can remove the optimizer if you don't want to use it)",
+      "author": {
+        "id": "410568850283823105",
+        "name": "dievardump",
+        "discriminator": "0964",
+        "nickname": "dievardump",
+        "color": "#2ECC71",
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/410568850283823105/2c1bfbfedc9059a23708a6f6ef6969d7.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "793448883488555028",
+      "type": "Default",
+      "timestamp": "2020-12-29T12:02:35.391+00:00",
+      "timestampEdited": "2020-12-29T12:02:41.108+00:00",
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "What version of OZ do you use in your project then? So I can get the same",
+      "author": {
+        "id": "410568850283823105",
+        "name": "dievardump",
+        "discriminator": "0964",
+        "nickname": "dievardump",
+        "color": "#2ECC71",
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/410568850283823105/2c1bfbfedc9059a23708a6f6ef6969d7.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "793449042205605888",
+      "type": "Default",
+      "timestamp": "2020-12-29T12:03:13.232+00:00",
+      "timestampEdited": "2020-12-29T12:03:34.005+00:00",
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "\"version\": \"2.4.0\",",
+      "author": {
+        "id": "443454213935071252",
+        "name": "asmit",
+        "discriminator": "4053",
+        "nickname": "asmit",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/embed/avatars/3.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "793449107221119028",
+      "type": "Default",
+      "timestamp": "2020-12-29T12:03:28.733+00:00",
+      "timestampEdited": "2020-12-29T12:03:30.198+00:00",
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "thx",
+      "author": {
+        "id": "410568850283823105",
+        "name": "dievardump",
+        "discriminator": "0964",
+        "nickname": "dievardump",
+        "color": "#2ECC71",
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/410568850283823105/2c1bfbfedc9059a23708a6f6ef6969d7.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "793449282757853185",
+      "type": "Default",
+      "timestamp": "2020-12-29T12:04:10.584+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "2.4.0 @openzeppelin/contracts",
+      "author": {
+        "id": "443454213935071252",
+        "name": "asmit",
+        "discriminator": "4053",
+        "nickname": "asmit",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/embed/avatars/3.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "793454793707225098",
+      "type": "Default",
+      "timestamp": "2020-12-29T12:26:04.497+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "@dievardump using solidity v 0.5.0 works fine,",
+      "author": {
+        "id": "443454213935071252",
+        "name": "asmit",
+        "discriminator": "4053",
+        "nickname": "asmit",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/embed/avatars/3.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": [
+        {
+          "id": "410568850283823105",
+          "name": "dievardump",
+          "discriminator": "0964",
+          "nickname": "dievardump",
+          "isBot": false
+        }
+      ]
+    },
+    {
+      "id": "793454812078276629",
+      "type": "Default",
+      "timestamp": "2020-12-29T12:26:08.877+00:00",
+      "timestampEdited": "2020-12-29T12:26:52.082+00:00",
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "please consider using it",
+      "author": {
+        "id": "443454213935071252",
+        "name": "asmit",
+        "discriminator": "4053",
+        "nickname": "asmit",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/embed/avatars/3.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "793455297845788672",
+      "type": "Default",
+      "timestamp": "2020-12-29T12:28:04.693+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "I am testing with your configuration",
+      "author": {
+        "id": "410568850283823105",
+        "name": "dievardump",
+        "discriminator": "0964",
+        "nickname": "dievardump",
+        "color": "#2ECC71",
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/410568850283823105/2c1bfbfedc9059a23708a6f6ef6969d7.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "793455398950404096",
+      "type": "Default",
+      "timestamp": "2020-12-29T12:28:28.798+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "I would personnaly not use 0.5.0 but to see what your problem is sure",
+      "author": {
+        "id": "410568850283823105",
+        "name": "dievardump",
+        "discriminator": "0964",
+        "nickname": "dievardump",
+        "color": "#2ECC71",
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/410568850283823105/2c1bfbfedc9059a23708a6f6ef6969d7.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "793455692244713472",
+      "type": "Default",
+      "timestamp": "2020-12-29T12:29:38.725+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "@dievardump i am looking forward for your help really screwed up trying",
+      "author": {
+        "id": "443454213935071252",
+        "name": "asmit",
+        "discriminator": "4053",
+        "nickname": "asmit",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/embed/avatars/3.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": [
+        {
+          "id": "410568850283823105",
+          "name": "dievardump",
+          "discriminator": "0964",
+          "nickname": "dievardump",
+          "isBot": false
+        }
+      ]
+    },
+    {
+      "id": "793456531530055681",
+      "type": "Default",
+      "timestamp": "2020-12-29T12:32:58.826+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "dievardump@dievardump-IdeaPad-5:/var/www/html/blockchain/help/mintingthrows$ truffle exec scripts/mint.js --network mumbai\nUsing network 'mumbai'.\n\n```js\n[\n  {\n    address: '0xA58504165591B11B4D1E4C5ACCB4b5718DcA2E7f',\n    blockNumber: 8673598,\n    transactionHash: '0xb34f12a125d7fd6e998d74940c1b22b1fb5cd29ef30ceac3a921177c54d88dd4',\n    transactionIndex: 0,\n    blockHash: '0x5b454d827a708d6acf11769a061f587d421b9433caee0c754aed4a0747a616a8',\n    logIndex: 0,\n    removed: false,\n    id: 'log_18811307',\n    event: 'Transfer',\n    args: Result {\n      '0': '0x0000000000000000000000000000000000000000',\n      '1': '0x6249cD0feb7A09F0092754e32c9d540c1D488bB8',\n      '2': [BN],\n      __length__: 3,\n      from: '0x0000000000000000000000000000000000000000',\n      to: '0x6249cD0feb7A09F0092754e32c9d540c1D488bB8',\n      tokenId: [BN]\n    }\n  }\n]\n```",
+      "author": {
+        "id": "410568850283823105",
+        "name": "dievardump",
+        "discriminator": "0964",
+        "nickname": "dievardump",
+        "color": "#2ECC71",
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/410568850283823105/2c1bfbfedc9059a23708a6f6ef6969d7.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": [
+        {
+          "id": "410568850283823105",
+          "name": "dievardump",
+          "discriminator": "0964",
+          "nickname": "dievardump",
+          "isBot": false
+        }
+      ]
+    },
+    {
+      "id": "793456578824372235",
+      "type": "Default",
+      "timestamp": "2020-12-29T12:33:10.102+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "This works without problem",
+      "author": {
+        "id": "410568850283823105",
+        "name": "dievardump",
+        "discriminator": "0964",
+        "nickname": "dievardump",
+        "color": "#2ECC71",
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/410568850283823105/2c1bfbfedc9059a23708a6f6ef6969d7.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "793456670084562954",
+      "type": "Default",
+      "timestamp": "2020-12-29T12:33:31.86+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "I deployed to mumbai and used a script to mint and there is no problem, are you sure it\"s the minting that throws?",
+      "author": {
+        "id": "410568850283823105",
+        "name": "dievardump",
+        "discriminator": "0964",
+        "nickname": "dievardump",
+        "color": "#2ECC71",
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/410568850283823105/2c1bfbfedc9059a23708a6f6ef6969d7.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "793457697465958401",
+      "type": "Default",
+      "timestamp": "2020-12-29T12:37:36.807+00:00",
+      "timestampEdited": "2020-12-29T12:43:48.227+00:00",
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "yes it's minting actually it's not getting deployed in the network, did you deployed using truffle or remix?",
+      "author": {
+        "id": "443454213935071252",
+        "name": "asmit",
+        "discriminator": "4053",
+        "nickname": "asmit",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/embed/avatars/3.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "793457698451750912",
+      "type": "Default",
+      "timestamp": "2020-12-29T12:37:37.042+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "GG @asmit, you just advanced to level 3!",
+      "author": {
+        "id": "159985870458322944",
+        "name": "MEE6",
+        "discriminator": "4876",
+        "nickname": "PolygonBot",
+        "color": null,
+        "isBot": true,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/159985870458322944/b50adff099924dd5e6b72d13f77eb9d7.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": [
+        {
+          "id": "443454213935071252",
+          "name": "asmit",
+          "discriminator": "4053",
+          "nickname": "asmit",
+          "isBot": false
+        }
+      ]
+    },
+    {
+      "id": "793459443518013510",
+      "type": "Default",
+      "timestamp": "2020-12-29T12:44:33.098+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "it is deployed but not mined",
+      "author": {
+        "id": "443454213935071252",
+        "name": "asmit",
+        "discriminator": "4053",
+        "nickname": "asmit",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/embed/avatars/3.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "793698099129876491",
+      "type": "Default",
+      "timestamp": "2020-12-30T04:32:53.03+00:00",
+      "timestampEdited": "2020-12-30T08:24:02.889+00:00",
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "guys the problem was fixed, thanks for this wonderful community",
+      "author": {
+        "id": "443454213935071252",
+        "name": "asmit",
+        "discriminator": "4053",
+        "nickname": "asmit",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/embed/avatars/3.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "808728490332782623",
+      "type": "Default",
+      "timestamp": "2021-02-09T15:58:17.544+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "I want to start my carrer as blockchain developer can anyone help me with the.I need some advice.",
+      "author": {
+        "id": "489750044992602113",
+        "name": "twiny",
+        "discriminator": "3549",
+        "nickname": "twiny",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/489750044992602113/7ec4817d0d4118a40214c2045a16b7a6.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "808744021236121642",
+      "type": "Default",
+      "timestamp": "2021-02-09T17:00:00.4+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "Can you write solidity or another language used for smart contracts?",
+      "author": {
+        "id": "311474981986893825",
+        "name": "xh3b4sd",
+        "discriminator": "6359",
+        "nickname": "xh3b4sd",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/311474981986893825/434564898d86e8dde86ff86d745cdf89.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "809136244117340220",
+      "type": "Default",
+      "timestamp": "2021-02-10T18:58:33.622+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "hello everyone, I have some questions regarding contract development... Im trying to deploy a contract in my test (using waffle/ethers.js) and i cant , to deploy a contract I need to pass another token contract to its constructor, but so far I dont know how to do it in the tests.",
+      "author": {
+        "id": "527528297219751936",
+        "name": "Ptrc",
+        "discriminator": "6542",
+        "nickname": "Ptrc",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/527528297219751936/3a65924ae3a81fce2c82ffea9a95894c.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "809136511873450005",
+      "type": "Default",
+      "timestamp": "2021-02-10T18:59:37.46+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "can somebody help me?, i had posted the question on ethereum.stackexchange.com but no luck yet.",
+      "author": {
+        "id": "527528297219751936",
+        "name": "Ptrc",
+        "discriminator": "6542",
+        "nickname": "Ptrc",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/527528297219751936/3a65924ae3a81fce2c82ffea9a95894c.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "809147945165389824",
+      "type": "Default",
+      "timestamp": "2021-02-10T19:45:03.369+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "@twiny  I was pointed to https://ethereum.org/en/developers/docs/  , and a lot of advises to starters is to start there., and for code, start reading code from known DAOs, ie. https://github.com/aave/aave-protocol , and learn tools like hardhat , remix, truffle.",
+      "author": {
+        "id": "527528297219751936",
+        "name": "Ptrc",
+        "discriminator": "6542",
+        "nickname": "Ptrc",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/527528297219751936/3a65924ae3a81fce2c82ffea9a95894c.png"
+      },
+      "attachments": [],
+      "embeds": [
+        {
+          "title": "Ethereum development documentation | ethereum.org",
+          "url": "https://ethereum.org/en/developers/docs/",
+          "timestamp": null,
+          "description": "Introducing the ethereum.org developer documentation.",
+          "color": "#1C1CE1",
+          "thumbnail": {
+            "url": "https://ethereum.org/static/bf78b49d7e23b88a7eea934225b0cf96/f3583/enterprise-eth.png",
+            "width": 1200,
+            "height": 822
+          },
+          "fields": []
+        },
+        {
+          "title": "aave/aave-protocol",
+          "url": "https://github.com/aave/aave-protocol",
+          "timestamp": null,
+          "description": "Aave Protocol Version 1.0 - Decentralized Lending Pools - aave/aave-protocol",
+          "color": "#1E2327",
+          "thumbnail": {
+            "url": "https://avatars.githubusercontent.com/u/47617460?s=400&v=4",
+            "width": 280,
+            "height": 280
+          },
+          "fields": []
+        }
+      ],
+      "reactions": [],
+      "mentions": [
+        {
+          "id": "489750044992602113",
+          "name": "twiny",
+          "discriminator": "3549",
+          "nickname": "twiny",
+          "isBot": false
+        }
+      ]
+    },
+    {
+      "id": "809422590413897819",
+      "type": "Default",
+      "timestamp": "2021-02-11T13:56:23.899+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "This is Ryuhei from Japan.\nI’m a senior blockchain engineer, looking for a remote job now.\n\nKindly check my profile.\nhttps://www.linkedin.com/in/ryuhei-matsuda/\nhttps://github.com/ryuheimat\n\nLooking forward to hearing from you.",
+      "author": {
+        "id": "532586973429235725",
+        "name": "NNFgoalT",
+        "discriminator": "5362",
+        "nickname": "NNFgoalT",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/532586973429235725/163e2564cceb8dec54a08592ea5197e2.png"
+      },
+      "attachments": [],
+      "embeds": [
+        {
+          "title": "ryuheimat - Overview",
+          "url": "https://github.com/ryuheimat",
+          "timestamp": null,
+          "description": "Blockchain Developer, Devops engineer and full stack web developer. - ryuheimat",
+          "color": "#1E2327",
+          "thumbnail": {
+            "url": "https://avatars.githubusercontent.com/u/40835770?s=400&u=a6b884ff2dbf7c1ae3a5d0f8c906f3c2de07ce5c&v=4",
+            "width": 400,
+            "height": 400
+          },
+          "fields": []
+        }
+      ],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "810702176501497866",
+      "type": "Default",
+      "timestamp": "2021-02-15T02:41:00.996+00:00",
+      "timestampEdited": "2021-02-15T02:49:46.002+00:00",
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "I can't seem to return 10k of data without a out-of-gas error. It's a view function though, shouldn't that be fine?",
+      "author": {
+        "id": "775940016626466837",
+        "name": "DuckingWhimsical",
+        "discriminator": "4242",
+        "nickname": "DuckingWhimsical",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/775940016626466837/a_38e0cc645aceca13996bbdce3ecfe59b.gif"
+      },
+      "attachments": [
+        {
+          "id": "810702176304889886",
+          "url": "https://cdn.discordapp.com/attachments/781758240320389130/810702176304889886/chainimg.txt",
+          "fileName": "chainimg.txt",
+          "fileSizeBytes": 164
+        }
+      ],
+      "embeds": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "810729242790199306",
+      "type": "Default",
+      "timestamp": "2021-02-15T04:28:34.102+00:00",
+      "timestampEdited": "2021-02-15T04:29:00.977+00:00",
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "I just got something deployed on Matic for the first time and it was really easy to get going. Thanks! \uD83D\uDE42",
+      "author": {
+        "id": "422359842171256832",
+        "name": "Yambo",
+        "discriminator": "0484",
+        "nickname": "Yambo",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/422359842171256832/a461c4e148c6dfe58f642da752a9d07c.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "811032484736663574",
+      "type": "Reply",
+      "timestamp": "2021-02-16T00:33:32.616+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "Hi Ryuhei, are you still looking for remote job?",
+      "author": {
+        "id": "565638965278015520",
+        "name": "Nealser",
+        "discriminator": "7453",
+        "nickname": "Nealser",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/565638965278015520/2ea83cd578d58bcebb664a7dbd34da6a.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": [
+        {
+          "id": "532586973429235725",
+          "name": "NNFgoalT",
+          "discriminator": "5362",
+          "nickname": "NNFgoalT",
+          "isBot": false
+        }
+      ],
+      "reference": {
+        "messageId": "809422590413897819",
+        "channelId": "781758240320389130",
+        "guildId": "635865020172861441"
+      }
+    },
+    {
+      "id": "811959214711898112",
+      "type": "Default",
+      "timestamp": "2021-02-18T13:56:02.26+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "hi team, do we have a way to do matic mainnnet fork testing ?",
+      "author": {
+        "id": "569046594746449939",
+        "name": "Viraz",
+        "discriminator": "4331",
+        "nickname": "Viraz",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/569046594746449939/6a099739dc8050f24ca6de0b813e7022.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "812351444242006027",
+      "type": "Default",
+      "timestamp": "2021-02-19T15:54:37.067+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "Hey everyone - not sure if this is the best place to ask but how do you get around the whole \"approval\" being missing from Matic?",
+      "author": {
+        "id": "407513157045714946",
+        "name": "TheKeiron",
+        "discriminator": "0001",
+        "nickname": "TheKeiron",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/407513157045714946/91890387f0cd284e34b789c44ef048c3.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "812351608561991731",
+      "type": "Default",
+      "timestamp": "2021-02-19T15:55:16.244+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "I have a contract on L1 that would usually be approved to spend tokens on behalf of the user in order to burn them in a transaction when minting an NFT",
+      "author": {
+        "id": "407513157045714946",
+        "name": "TheKeiron",
+        "discriminator": "0001",
+        "nickname": "TheKeiron",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/407513157045714946/91890387f0cd284e34b789c44ef048c3.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "812351861892972545",
+      "type": "Default",
+      "timestamp": "2021-02-19T15:56:16.643+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "but on Matic the same contract wouldn't work - it would require the user to burn the tokens prior, or I guess I would have to change the functionality of the ERC20 token itself to include the rest of what i need",
+      "author": {
+        "id": "407513157045714946",
+        "name": "TheKeiron",
+        "discriminator": "0001",
+        "nickname": "TheKeiron",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/407513157045714946/91890387f0cd284e34b789c44ef048c3.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "812897000890433547",
+      "type": "Default",
+      "timestamp": "2021-02-21T04:02:27.908+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "@xh3b4sd during my college I learn c and foundation course for Java and currently learning solidity self thaught.",
+      "author": {
+        "id": "489750044992602113",
+        "name": "twiny",
+        "discriminator": "3549",
+        "nickname": "twiny",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/489750044992602113/7ec4817d0d4118a40214c2045a16b7a6.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": [
+        {
+          "id": "311474981986893825",
+          "name": "xh3b4sd",
+          "discriminator": "6359",
+          "nickname": "xh3b4sd",
+          "isBot": false
+        }
+      ]
+    },
+    {
+      "id": "812991633875664897",
+      "type": "Reply",
+      "timestamp": "2021-02-21T10:18:30.17+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "So you got a project to work on right now?",
+      "author": {
+        "id": "311474981986893825",
+        "name": "xh3b4sd",
+        "discriminator": "6359",
+        "nickname": "xh3b4sd",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/311474981986893825/434564898d86e8dde86ff86d745cdf89.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": [
+        {
+          "id": "489750044992602113",
+          "name": "twiny",
+          "discriminator": "3549",
+          "nickname": "twiny",
+          "isBot": false
+        }
+      ],
+      "reference": {
+        "messageId": "812897000890433547",
+        "channelId": "781758240320389130",
+        "guildId": "635865020172861441"
+      }
+    },
+    {
+      "id": "813106916570038283",
+      "type": "Default",
+      "timestamp": "2021-02-21T17:56:35.706+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "are there any mumbai faucets that drip more than 0.1 matic?",
+      "author": {
+        "id": "194246322017009666",
+        "name": "rus",
+        "discriminator": "2775",
+        "nickname": "rus",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/194246322017009666/f7fcb117630c0d79e133b51a0bc195a2.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "813106972090040320",
+      "type": "Default",
+      "timestamp": "2021-02-21T17:56:48.943+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "im trying to deploy some contracts to mumbai to test and im having gas issues",
+      "author": {
+        "id": "194246322017009666",
+        "name": "rus",
+        "discriminator": "2775",
+        "nickname": "rus",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/194246322017009666/f7fcb117630c0d79e133b51a0bc195a2.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "813107202926575646",
+      "type": "Default",
+      "timestamp": "2021-02-21T17:57:43.979+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "oh that worked",
+      "author": {
+        "id": "194246322017009666",
+        "name": "rus",
+        "discriminator": "2775",
+        "nickname": "rus",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/194246322017009666/f7fcb117630c0d79e133b51a0bc195a2.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "813107219955712020",
+      "type": "Default",
+      "timestamp": "2021-02-21T17:57:48.039+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "thanks for the help \uD83D\uDE02",
+      "author": {
+        "id": "194246322017009666",
+        "name": "rus",
+        "discriminator": "2775",
+        "nickname": "rus",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/194246322017009666/f7fcb117630c0d79e133b51a0bc195a2.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "813137475299049562",
+      "type": "Reply",
+      "timestamp": "2021-02-21T19:58:01.475+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "did yoy find a solution for this?",
+      "author": {
+        "id": "703954008003444796",
+        "name": "Nikk€",
+        "discriminator": "9923",
+        "nickname": "Nikk€",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/embed/avatars/3.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": [
+        {
+          "id": "194246322017009666",
+          "name": "rus",
+          "discriminator": "2775",
+          "nickname": "rus",
+          "isBot": false
+        }
+      ],
+      "reference": {
+        "messageId": "813106916570038283",
+        "channelId": "781758240320389130",
+        "guildId": "635865020172861441"
+      }
+    },
+    {
+      "id": "813140273721901067",
+      "type": "Default",
+      "timestamp": "2021-02-21T20:09:08.671+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "only patience \uD83D\uDE26",
+      "author": {
+        "id": "194246322017009666",
+        "name": "rus",
+        "discriminator": "2775",
+        "nickname": "rus",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/194246322017009666/f7fcb117630c0d79e133b51a0bc195a2.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "813147247529295902",
+      "type": "Default",
+      "timestamp": "2021-02-21T20:36:51.356+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "\uD83D\uDE41 hope they change that in the future",
+      "author": {
+        "id": "703954008003444796",
+        "name": "Nikk€",
+        "discriminator": "9923",
+        "nickname": "Nikk€",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/embed/avatars/3.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "813148783642542121",
+      "type": "Default",
+      "timestamp": "2021-02-21T20:42:57.594+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "Contract Creation\nError: max code size exceeded",
+      "author": {
+        "id": "194246322017009666",
+        "name": "rus",
+        "discriminator": "2775",
+        "nickname": "rus",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/194246322017009666/f7fcb117630c0d79e133b51a0bc195a2.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "813148822624534528",
+      "type": "Default",
+      "timestamp": "2021-02-21T20:43:06.888+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "whats the max code size?",
+      "author": {
+        "id": "194246322017009666",
+        "name": "rus",
+        "discriminator": "2775",
+        "nickname": "rus",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/194246322017009666/f7fcb117630c0d79e133b51a0bc195a2.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "813316578077573170",
+      "type": "Reply",
+      "timestamp": "2021-02-22T07:49:42.905+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "~24 Kb",
+      "author": {
+        "id": "455243274823794700",
+        "name": "Anurag",
+        "discriminator": "8408",
+        "nickname": "Anurag",
+        "color": "#3498DB",
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/embed/avatars/3.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": [
+        {
+          "id": "194246322017009666",
+          "name": "rus",
+          "discriminator": "2775",
+          "nickname": "rus",
+          "isBot": false
+        }
+      ],
+      "reference": {
+        "messageId": "813148822624534528",
+        "channelId": "781758240320389130",
+        "guildId": "635865020172861441"
+      }
+    },
+    {
+      "id": "813316797347659786",
+      "type": "Reply",
+      "timestamp": "2021-02-22T07:50:35.183+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "`approval` does not work for Plasma tokens.\n\nIf you use the PoS system, `approval` works similar to Ethereum",
+      "author": {
+        "id": "455243274823794700",
+        "name": "Anurag",
+        "discriminator": "8408",
+        "nickname": "Anurag",
+        "color": "#3498DB",
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/embed/avatars/3.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": [
+        {
+          "id": "407513157045714946",
+          "name": "TheKeiron",
+          "discriminator": "0001",
+          "nickname": "TheKeiron",
+          "isBot": false
+        }
+      ],
+      "reference": {
+        "messageId": "812351444242006027",
+        "channelId": "781758240320389130",
+        "guildId": "635865020172861441"
+      }
+    },
+    {
+      "id": "813316840536801331",
+      "type": "Default",
+      "timestamp": "2021-02-22T07:50:45.48+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "@TheKeiron",
+      "author": {
+        "id": "455243274823794700",
+        "name": "Anurag",
+        "discriminator": "8408",
+        "nickname": "Anurag",
+        "color": "#3498DB",
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/embed/avatars/3.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": [
+        {
+          "id": "407513157045714946",
+          "name": "TheKeiron",
+          "discriminator": "0001",
+          "nickname": "TheKeiron",
+          "isBot": false
+        }
+      ]
+    },
+    {
+      "id": "813318058923524107",
+      "type": "Reply",
+      "timestamp": "2021-02-22T07:55:35.966+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "Thanks for the reply - so is it possible to get a smart contract to spend on behalf of a user on the POS system?",
+      "author": {
+        "id": "407513157045714946",
+        "name": "TheKeiron",
+        "discriminator": "0001",
+        "nickname": "TheKeiron",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/407513157045714946/91890387f0cd284e34b789c44ef048c3.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": [
+        {
+          "id": "455243274823794700",
+          "name": "Anurag",
+          "discriminator": "8408",
+          "nickname": "Anurag",
+          "isBot": false
+        }
+      ],
+      "reference": {
+        "messageId": "813316797347659786",
+        "channelId": "781758240320389130",
+        "guildId": "635865020172861441"
+      }
+    },
+    {
+      "id": "813318785217855528",
+      "type": "Default",
+      "timestamp": "2021-02-22T07:58:29.128+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "The polygon devs said that the user cannot approve a contract to spend on behalf of the user because the approval related functions are overridden to revert https://github.com/maticnetwork/contracts/blob/master/contracts/child/ChildERC20.sol",
+      "author": {
+        "id": "407513157045714946",
+        "name": "TheKeiron",
+        "discriminator": "0001",
+        "nickname": "TheKeiron",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/407513157045714946/91890387f0cd284e34b789c44ef048c3.png"
+      },
+      "attachments": [],
+      "embeds": [
+        {
+          "title": "maticnetwork/contracts",
+          "url": "https://github.com/maticnetwork/contracts/blob/master/contracts/child/ChildERC20.sol",
+          "timestamp": null,
+          "description": "Smart contracts comprising the business logic of the Matic Network - maticnetwork/contracts",
+          "color": "#1E2327",
+          "thumbnail": {
+            "url": "https://avatars.githubusercontent.com/u/30753617?s=400&v=4",
+            "width": 400,
+            "height": 400
+          },
+          "fields": []
+        }
+      ],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "813332104431009794",
+      "type": "Default",
+      "timestamp": "2021-02-22T08:51:24.676+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "this is true for Plasma tokens",
+      "author": {
+        "id": "455243274823794700",
+        "name": "Anurag",
+        "discriminator": "8408",
+        "nickname": "Anurag",
+        "color": "#3498DB",
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/embed/avatars/3.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "813332179542343710",
+      "type": "Default",
+      "timestamp": "2021-02-22T08:51:42.584+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "not for PoS tokens or native tokens",
+      "author": {
+        "id": "455243274823794700",
+        "name": "Anurag",
+        "discriminator": "8408",
+        "nickname": "Anurag",
+        "color": "#3498DB",
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/embed/avatars/3.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "813332182290006078",
+      "type": "Default",
+      "timestamp": "2021-02-22T08:51:43.239+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "https://github.com/maticnetwork/pos-portal/blob/master/contracts/child/ChildToken/ChildERC20.sol",
+      "author": {
+        "id": "455243274823794700",
+        "name": "Anurag",
+        "discriminator": "8408",
+        "nickname": "Anurag",
+        "color": "#3498DB",
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/embed/avatars/3.png"
+      },
+      "attachments": [],
+      "embeds": [
+        {
+          "title": "maticnetwork/pos-portal",
+          "url": "https://github.com/maticnetwork/pos-portal/blob/master/contracts/child/ChildToken/ChildERC20.sol",
+          "timestamp": null,
+          "description": "Smart contracts that powers the PoS (proof-of-stake) based bridge mechanism for Matic Network - maticnetwork/pos-portal",
+          "color": "#1E2327",
+          "thumbnail": {
+            "url": "https://avatars.githubusercontent.com/u/30753617?s=400&v=4",
+            "width": 400,
+            "height": 400
+          },
+          "fields": []
+        }
+      ],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "813332300291899402",
+      "type": "Default",
+      "timestamp": "2021-02-22T08:52:11.373+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "https://docs.matic.network/docs/develop/ethereum-matic/getting-started#pos-vs-plasma",
+      "author": {
+        "id": "455243274823794700",
+        "name": "Anurag",
+        "discriminator": "8408",
+        "nickname": "Anurag",
+        "color": "#3498DB",
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/embed/avatars/3.png"
+      },
+      "attachments": [],
+      "embeds": [
+        {
+          "title": "Ethereum↔Matic Bridge | Matic Network | Documentation",
+          "url": "https://docs.matic.network/docs/develop/ethereum-matic/getting-started",
+          "timestamp": null,
+          "description": "Build your next blockchain app on Matic.",
+          "thumbnail": {
+            "url": "https://matic.network/banners/matic-network-16x9.png",
+            "width": 7680,
+            "height": 4320
+          },
+          "fields": []
+        }
+      ],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "813349851475345428",
+      "type": "Default",
+      "timestamp": "2021-02-22T10:01:55.901+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "Thanks @Anurag for all the information! Very helpful \uD83D\uDC4D  I was under the impression I would have to work around the approval being missing but looks like POS comes to the rescue \uD83D\uDE06",
+      "author": {
+        "id": "407513157045714946",
+        "name": "TheKeiron",
+        "discriminator": "0001",
+        "nickname": "TheKeiron",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/407513157045714946/91890387f0cd284e34b789c44ef048c3.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [
+        {
+          "emoji": {
+            "id": "715670044658368632",
+            "name": "bigbrain",
+            "isAnimated": false,
+            "imageUrl": "https://cdn.discordapp.com/emojis/715670044658368632.png"
+          },
+          "count": 1
+        }
+      ],
+      "mentions": [
+        {
+          "id": "455243274823794700",
+          "name": "Anurag",
+          "discriminator": "8408",
+          "nickname": "Anurag",
+          "isBot": false
+        }
+      ]
+    },
+    {
+      "id": "813483789803454534",
+      "type": "Default",
+      "timestamp": "2021-02-22T18:54:09.287+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "Approval is useless",
+      "author": {
+        "id": "537600835966861314",
+        "name": "Wedergarten",
+        "discriminator": "3301",
+        "nickname": "Wedergarten",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/537600835966861314/a_723f8ce748cea3da4ecfe8c0c5b19457.gif"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "813522020213588018",
+      "type": "Default",
+      "timestamp": "2021-02-22T21:26:04.127+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "anyone have reccomendations on how to integrate multisig? should I just deploy the gnosis source code on matic?",
+      "author": {
+        "id": "409886078783324160",
+        "name": "jp4g",
+        "discriminator": "5109",
+        "nickname": "jp4g",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/409886078783324160/6820d8e52ac3709fb7388a8eb2ae6ffc.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "813737126444400641",
+      "type": "Default",
+      "timestamp": "2021-02-23T11:40:49.449+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "I'm working on an ERC721 that mints on Matic, but has some metadata inside the NFT, and ideally i would like to bring the metadata across to L1 if the user brings the NFT from Matic to L1; are there any examples of this? I can see the on the `ChildMintableERC721.sol` it has the deposit and withdraw functions but the only data there is to do with which token id to burn/mint:\nhttps://github.com/maticnetwork/pos-portal/blob/master/contracts/child/ChildToken/ChildMintableERC721.sol",
+      "author": {
+        "id": "407513157045714946",
+        "name": "TheKeiron",
+        "discriminator": "0001",
+        "nickname": "TheKeiron",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/407513157045714946/91890387f0cd284e34b789c44ef048c3.png"
+      },
+      "attachments": [],
+      "embeds": [
+        {
+          "title": "maticnetwork/pos-portal",
+          "url": "https://github.com/maticnetwork/pos-portal/blob/master/contracts/child/ChildToken/ChildMintableERC721.sol",
+          "timestamp": null,
+          "description": "Smart contracts that powers the PoS (proof-of-stake) based bridge mechanism for Matic Network - maticnetwork/pos-portal",
+          "color": "#1E2327",
+          "thumbnail": {
+            "url": "https://avatars.githubusercontent.com/u/30753617?s=400&v=4",
+            "width": 400,
+            "height": 400
+          },
+          "fields": []
+        }
+      ],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "815514750028218368",
+      "type": "Default",
+      "timestamp": "2021-02-28T09:24:27.938+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "I'm working on an ERC721 contract that mints on Polygon/Matic, but this means the NFTs will only exist on Matic; does anyone have any examples/pointers on what functions are required inside the ERC721 contract on layer 1 to allow the bridge to mint NFTs on L1? The docs only have about NFTs being \"locked up\" in the bridge when they are brought to L2, not about bringing them into existence when they only exist on L2 and you want to bring them to L1",
+      "author": {
+        "id": "407513157045714946",
+        "name": "TheKeiron",
+        "discriminator": "0001",
+        "nickname": "TheKeiron",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/407513157045714946/91890387f0cd284e34b789c44ef048c3.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [
+        {
+          "emoji": {
+            "id": null,
+            "name": "\uD83D\uDC4F\uD83C\uDFFC",
+            "isAnimated": false,
+            "imageUrl": "https://twemoji.maxcdn.com/2/72x72/1f44f-1f3fc.png"
+          },
+          "count": 1
+        }
+      ],
+      "mentions": []
+    },
+    {
+      "id": "815808868155654234",
+      "type": "Reply",
+      "timestamp": "2021-03-01T04:53:11.164+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "i have the same issue",
+      "author": {
+        "id": "461411201818165249",
+        "name": "komy",
+        "discriminator": "7477",
+        "nickname": "komy",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/461411201818165249/7f24f0d8ece3cc6b5779bb2890c22c71.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": [
+        {
+          "id": "407513157045714946",
+          "name": "TheKeiron",
+          "discriminator": "0001",
+          "nickname": "TheKeiron",
+          "isBot": false
+        }
+      ],
+      "reference": {
+        "messageId": "815514750028218368",
+        "channelId": "781758240320389130",
+        "guildId": "635865020172861441"
+      }
+    },
+    {
+      "id": "815860249960775710",
+      "type": "Default",
+      "timestamp": "2021-03-01T08:17:21.541+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "Hi everyone, nice to meet you.\nI have a question in contract verify.\nIn ethereum and bsc, I used truffle verify using etherscan api key.\nIn matic network, I just deployed smart contracts to mainnet, but not sure how to verify them.\nPlease help me if anyone knows how to verify contracts using truffle.",
+      "author": {
+        "id": "815845990396592129",
+        "name": "dmitry",
+        "discriminator": "5014",
+        "nickname": "dmitry",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/embed/avatars/4.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "815860606803771392",
+      "type": "Reply",
+      "timestamp": "2021-03-01T08:18:46.619+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "I actually got an answer from the matic telegram chat, there's existing examples on the POS portal \n\nThis is for the L1 side (ethereum):\nhttps://github.com/maticnetwork/pos-portal/blob/master/contracts/root/RootToken/DummyMintableERC721.sol\n\nAnd this is the matic/polygon L2 side:\nhttps://github.com/maticnetwork/pos-portal/blob/master/contracts/child/ChildToken/ChildMintableERC721.sol\n\nNote these examples bring both the token and the metadata (which i actually asked about earlier and never got pointed to!) if you don't need the metadata to be migrated too look at DummyERC721.sol/ChildERC721.sol",
+      "author": {
+        "id": "407513157045714946",
+        "name": "TheKeiron",
+        "discriminator": "0001",
+        "nickname": "TheKeiron",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/407513157045714946/91890387f0cd284e34b789c44ef048c3.png"
+      },
+      "attachments": [],
+      "embeds": [
+        {
+          "title": "maticnetwork/pos-portal",
+          "url": "https://github.com/maticnetwork/pos-portal/blob/master/contracts/root/RootToken/DummyMintableERC721.sol",
+          "timestamp": null,
+          "description": "Smart contracts that powers the PoS (proof-of-stake) based bridge mechanism for Matic Network - maticnetwork/pos-portal",
+          "color": "#1E2327",
+          "thumbnail": {
+            "url": "https://avatars.githubusercontent.com/u/30753617?s=400&v=4",
+            "width": 400,
+            "height": 400
+          },
+          "fields": []
+        },
+        {
+          "title": "maticnetwork/pos-portal",
+          "url": "https://github.com/maticnetwork/pos-portal/blob/master/contracts/child/ChildToken/ChildMintableERC721.sol",
+          "timestamp": null,
+          "description": "Smart contracts that powers the PoS (proof-of-stake) based bridge mechanism for Matic Network - maticnetwork/pos-portal",
+          "color": "#1E2327",
+          "thumbnail": {
+            "url": "https://avatars.githubusercontent.com/u/30753617?s=400&v=4",
+            "width": 400,
+            "height": 400
+          },
+          "fields": []
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": {
+            "id": null,
+            "name": "\uD83D\uDE4F\uD83C\uDFFC",
+            "isAnimated": false,
+            "imageUrl": "https://twemoji.maxcdn.com/2/72x72/1f64f-1f3fc.png"
+          },
+          "count": 1
+        }
+      ],
+      "mentions": [
+        {
+          "id": "461411201818165249",
+          "name": "komy",
+          "discriminator": "7477",
+          "nickname": "komy",
+          "isBot": false
+        }
+      ],
+      "reference": {
+        "messageId": "815808868155654234",
+        "channelId": "781758240320389130",
+        "guildId": "635865020172861441"
+      }
+    },
+    {
+      "id": "815888941978615840",
+      "type": "Default",
+      "timestamp": "2021-03-01T10:11:22.251+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "Hey everyone \uD83D\uDE42\nI am using Hardhat to develop and test my Smart Contracts. \nAnyone of you using it too?\nDoes anyone know if it is possible to set the block number in the tests?\nI would like to test a function, which executes code based on the block number \uD83D\uDE42",
+      "author": {
+        "id": "354384051446087680",
+        "name": "jello",
+        "discriminator": "3260",
+        "nickname": "jello",
+        "color": "#2ECC71",
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/embed/avatars/0.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "816193503746588702",
+      "type": "Reply",
+      "timestamp": "2021-03-02T06:21:35.435+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "Not sure if there is a way to set a block number, but on hardhat's local blockchain each transaction adds a new block. So you could reach the required block by creating new txns repeatedly",
+      "author": {
+        "id": "453089755924791317",
+        "name": "__acidicHydrogen__",
+        "discriminator": "4662",
+        "nickname": "__acidicHydrogen__",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/453089755924791317/a_febc3c7ca14702c46aec9ccaff7deb36.gif"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": [
+        {
+          "id": "354384051446087680",
+          "name": "jello",
+          "discriminator": "3260",
+          "nickname": "jello",
+          "isBot": false
+        }
+      ],
+      "reference": {
+        "messageId": "815888941978615840",
+        "channelId": "781758240320389130",
+        "guildId": "635865020172861441"
+      }
+    },
+    {
+      "id": "816464922073497601",
+      "type": "Default",
+      "timestamp": "2021-03-03T00:20:06.607+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "Can I send transactions through my already-deployed ethereum layer 1 smart contract on the matic/polygon network? If so, what would I need to do it? Sorry if this is a noob question. \uD83D\uDE05",
+      "author": {
+        "id": "422359842171256832",
+        "name": "Yambo",
+        "discriminator": "0484",
+        "nickname": "Yambo",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/422359842171256832/a461c4e148c6dfe58f642da752a9d07c.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "816568470195929088",
+      "type": "Reply",
+      "timestamp": "2021-03-03T07:11:34.403+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "Thanks :) hmm, I think that would be good, if you good set the block number in order to test functionality",
+      "author": {
+        "id": "354384051446087680",
+        "name": "jello",
+        "discriminator": "3260",
+        "nickname": "jello",
+        "color": "#2ECC71",
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/embed/avatars/0.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": [
+        {
+          "id": "453089755924791317",
+          "name": "__acidicHydrogen__",
+          "discriminator": "4662",
+          "nickname": "__acidicHydrogen__",
+          "isBot": false
+        }
+      ],
+      "reference": {
+        "messageId": "816193503746588702",
+        "channelId": "781758240320389130",
+        "guildId": "635865020172861441"
+      }
+    },
+    {
+      "id": "818342726655410176",
+      "type": "Default",
+      "timestamp": "2021-03-08T04:41:50.107+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "If I want extra features in a 721 token, for example a few extra mappings, is it still possible to have a bridge to mainnet?",
+      "author": {
+        "id": "420245176548851723",
+        "name": "Dave Appleton",
+        "discriminator": "5959",
+        "nickname": "Dave Appleton",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/420245176548851723/2a48ce0d927a623f6b879786a3a69a16.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "818348132986781716",
+      "type": "Reply",
+      "timestamp": "2021-03-08T05:03:19.077+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "There is a call that you can make - see here\nhttps://ethereum.stackexchange.com/questions/15755/simulating-the-passage-of-time-with-testrpc",
+      "author": {
+        "id": "420245176548851723",
+        "name": "Dave Appleton",
+        "discriminator": "5959",
+        "nickname": "Dave Appleton",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/420245176548851723/2a48ce0d927a623f6b879786a3a69a16.png"
+      },
+      "attachments": [],
+      "embeds": [
+        {
+          "title": "Simulating the passage of time with testrpc",
+          "url": "https://ethereum.stackexchange.com/questions/15755/simulating-the-passage-of-time-with-testrpc",
+          "timestamp": null,
+          "description": "Any tips on how to simulate real network conditions on the testrpc testing client using truffle?  I have some functions that look at blocknumber and try to deal with passing time.  Has anyone come up",
+          "thumbnail": {
+            "url": "https://cdn.sstatic.net/Sites/ethereum/Img/apple-touch-icon@2.png?v=fcf6615497f4",
+            "width": 316,
+            "height": 316
+          },
+          "fields": []
+        }
+      ],
+      "reactions": [],
+      "mentions": [
+        {
+          "id": "354384051446087680",
+          "name": "jello",
+          "discriminator": "3260",
+          "nickname": "jello",
+          "isBot": false
+        }
+      ],
+      "reference": {
+        "messageId": "815888941978615840",
+        "channelId": "781758240320389130",
+        "guildId": "635865020172861441"
+      }
+    },
+    {
+      "id": "820248462108393473",
+      "type": "Reply",
+      "timestamp": "2021-03-13T10:54:32.846+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "Are you still up for a gig. We are  currently looking for an experienced dev to join our Team",
+      "author": {
+        "id": "813704366174371841",
+        "name": "Richdad - Hedgeplus.io",
+        "discriminator": "0753",
+        "nickname": "Richdad - Hedgeplus.io",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/embed/avatars/3.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": [
+        {
+          "id": "532586973429235725",
+          "name": "NNFgoalT",
+          "discriminator": "5362",
+          "nickname": "NNFgoalT",
+          "isBot": false
+        }
+      ],
+      "reference": {
+        "messageId": "809422590413897819",
+        "channelId": "781758240320389130",
+        "guildId": "635865020172861441"
+      }
+    },
+    {
+      "id": "820342784695205958",
+      "type": "Default",
+      "timestamp": "2021-03-13T17:09:21.103+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "Anyone knows how to convert string to bytes32 ?",
+      "author": {
+        "id": "499814387578830850",
+        "name": "Adityadhir",
+        "discriminator": "1069",
+        "nickname": "Adityadhir",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/499814387578830850/653aa4fa4709066322f1034276da9253.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "820342825082290186",
+      "type": "Default",
+      "timestamp": "2021-03-13T17:09:30.732+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "@here",
+      "author": {
+        "id": "499814387578830850",
+        "name": "Adityadhir",
+        "discriminator": "1069",
+        "nickname": "Adityadhir",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/499814387578830850/653aa4fa4709066322f1034276da9253.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "824315556815306782",
+      "type": "Default",
+      "timestamp": "2021-03-24T16:15:43.787+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "Hi, I use Remix and want to deploy contract by matic testnetwork.  But it always alert this warning. Could anyone help me?",
+      "author": {
+        "id": "819524014820425749",
+        "name": "Pearl",
+        "discriminator": "2180",
+        "nickname": "Pearl",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/819524014820425749/d305e84ec369d03ed23678e25e607a54.png"
+      },
+      "attachments": [
+        {
+          "id": "824315556604805140",
+          "url": "https://cdn.discordapp.com/attachments/781758240320389130/824315556604805140/1616572553229.png",
+          "fileName": "1616572553229.png",
+          "fileSizeBytes": 20541
+        }
+      ],
+      "embeds": [],
+      "reactions": [
+        {
+          "emoji": {
+            "id": null,
+            "name": "\uD83D\uDCAA",
+            "isAnimated": false,
+            "imageUrl": "https://twemoji.maxcdn.com/2/72x72/1f4aa.png"
+          },
+          "count": 1
+        }
+      ],
+      "mentions": []
+    },
+    {
+      "id": "824356346228899900",
+      "type": "Default",
+      "timestamp": "2021-03-24T18:57:48.741+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "hi , does the current implementation of polygon support all generalized ETH smart contracts? if not what are the main limitations ?",
+      "author": {
+        "id": "129374921662005249",
+        "name": "defiderp69",
+        "discriminator": "6216",
+        "nickname": "defiderp69",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/129374921662005249/5fa96ca1ac0d8f3989396eacb57030de.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "824357249384316958",
+      "type": "Default",
+      "timestamp": "2021-03-24T19:01:24.07+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "when i try to deploy contract it errors stating it cannot estimate gas, has anyone seen this before?",
+      "author": {
+        "id": "346985800145043467",
+        "name": "JaxCoder",
+        "discriminator": "8789",
+        "nickname": "JaxCoder",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/346985800145043467/47685d850036439c4b579b192390e3cc.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "825703988556988438",
+      "type": "Reply",
+      "timestamp": "2021-03-28T12:12:51.71+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "Afaik ig there's some error in the code in the payable functions, if not then did you get test ether from Faucet before trying to deploy the contract ?",
+      "author": {
+        "id": "744765545513222235",
+        "name": "Soumitro",
+        "discriminator": "9266",
+        "nickname": "Soumitro",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/744765545513222235/0fdd925476457fc707c52d6aa9894463.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": [
+        {
+          "id": "819524014820425749",
+          "name": "Pearl",
+          "discriminator": "2180",
+          "nickname": "Pearl",
+          "isBot": false
+        }
+      ],
+      "reference": {
+        "messageId": "824315556815306782",
+        "channelId": "781758240320389130",
+        "guildId": "635865020172861441"
+      }
+    },
+    {
+      "id": "827549297099669575",
+      "type": "Default",
+      "timestamp": "2021-04-02T14:25:27.551+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "Hey, trying to verify my smart contract on Mumbai testnet.\n\nIt's a simple ERC20 that inherits from Open Zeppelin ERC20.\n\nI used truffle flattener but I get an error that the file contains multiple SPDX lines (which is true). When I remove those lines I get the error:\n\"Bytecode does not match, please try again.\"\n\nAny ideas?",
+      "author": {
+        "id": "126366473852682242",
+        "name": "elie",
+        "discriminator": "1329",
+        "nickname": "elie",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/126366473852682242/59582d72a7de5a1a83e53f7f6724b373.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "829319287315103825",
+      "type": "Default",
+      "timestamp": "2021-04-07T11:38:46.103+00:00",
+      "timestampEdited": "2021-04-07T11:39:04.023+00:00",
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "sorry guys, I see I can only retrieve events from 1000 blocks in the past \"with my plan\". what does it mean? where can I read more? I guess I have to pay. I am working to move my dapp to Polygon, but I just realized this limitation and my dapp is completely based on events. Can anyone help me? thanks in advance.",
+      "author": {
+        "id": "407783055558705163",
+        "name": "maxxflyer",
+        "discriminator": "3197",
+        "nickname": "maxxflyer",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/407783055558705163/fe7f2a51ed4d1b8d2a4deb0cfab2444c.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "829707497988161576",
+      "type": "Default",
+      "timestamp": "2021-04-08T13:21:22.74+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "Can u setup prepaid transactions on matic ?",
+      "author": {
+        "id": "612015282676039730",
+        "name": "sir0racle",
+        "discriminator": "7438",
+        "nickname": "sir0racle",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/612015282676039730/5ed72af2cf083f55079872f6e6a02d46.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "829850574472216577",
+      "type": "Default",
+      "timestamp": "2021-04-08T22:49:54.832+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "Hi there, really dumb question but I don't understand how to read a smartcontract from an address. Let's say i want to read contract at address https://explorer-mainnet.maticvigil.com/address/0xc7aD82C1Ca8f122765B6A2454CF5acb1b6b83C39/contracts \nwhy do I only see binary?",
+      "author": {
+        "id": "235879695780937730",
+        "name": "LoupCanon",
+        "discriminator": "8766",
+        "nickname": "LoupCanon",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/235879695780937730/d22511fc2d0e37fd627dc15fc1dc20da.png"
+      },
+      "attachments": [],
+      "embeds": [
+        {
+          "title": "Contract 0xc7aD82C1Ca8f122765B6A2454CF5acb1b6b83C39 - Mainnet Expl...",
+          "url": "https://explorer-mainnet.maticvigil.com/address/0xc7aD82C1Ca8f122765B6A2454CF5acb1b6b83C39/contracts",
+          "timestamp": null,
+          "description": "View the account balance, transactions, and other data for 0xc7aD82C1Ca8f122765B6A2454CF5acb1b6b83C39 on the Matic",
+          "color": "#FFFFFF",
+          "fields": []
+        }
+      ],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "830299202121891840",
+      "type": "Reply",
+      "timestamp": "2021-04-10T04:32:35.999+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "because the contract is not verified... whoever deployed it would have to send the code to be verified",
+      "author": {
+        "id": "400785555581042690",
+        "name": "Crypto Mosin",
+        "discriminator": "2391",
+        "nickname": "Crypto Mosin",
+        "color": "#F1C40F",
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/400785555581042690/cbf4911b66353d1fc03877803bee6eae.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [
+        {
+          "emoji": {
+            "id": null,
+            "name": "\uD83D\uDC4C",
+            "isAnimated": false,
+            "imageUrl": "https://twemoji.maxcdn.com/2/72x72/1f44c.png"
+          },
+          "count": 2
+        }
+      ],
+      "mentions": [
+        {
+          "id": "235879695780937730",
+          "name": "LoupCanon",
+          "discriminator": "8766",
+          "nickname": "LoupCanon",
+          "isBot": false
+        }
+      ],
+      "reference": {
+        "messageId": "829850574472216577",
+        "channelId": "781758240320389130",
+        "guildId": "635865020172861441"
+      }
+    },
+    {
+      "id": "830476513728135209",
+      "type": "Default",
+      "timestamp": "2021-04-10T16:17:10.38+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "GG @Crypto Mosin, you just advanced to level 1!",
+      "author": {
+        "id": "159985870458322944",
+        "name": "MEE6",
+        "discriminator": "4876",
+        "nickname": "PolygonBot",
+        "color": null,
+        "isBot": true,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/159985870458322944/b50adff099924dd5e6b72d13f77eb9d7.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": [
+        {
+          "id": "400785555581042690",
+          "name": "Crypto Mosin",
+          "discriminator": "2391",
+          "nickname": "Crypto Mosin",
+          "isBot": false
+        }
+      ]
+    },
+    {
+      "id": "830625436672327721",
+      "type": "Default",
+      "timestamp": "2021-04-11T02:08:56.377+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "Hi guys. Complete newbie question - are all smart contract on the polygon network written in solidity? Thanks! \uD83D\uDE4F",
+      "author": {
+        "id": "633332214318235679",
+        "name": "Chedz",
+        "discriminator": "5097",
+        "nickname": "Chedz",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/633332214318235679/10701172b4277b89bbefce45cf76d09d.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "830664672364593163",
+      "type": "Default",
+      "timestamp": "2021-04-11T04:44:50.895+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "Probably yes but the more accurate answer is that they all target the Ethereum virtual machine. Solidity generates bytecode that runs in the Ethereum VM, but there are also a few alternative programming languages that can also generate Ethereum VM bytecode.",
+      "author": {
+        "id": "198451964370092032",
+        "name": "Rock Howard",
+        "discriminator": "8203",
+        "nickname": "Rock Howard",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/198451964370092032/763ff5adfd4697f62576df05d4fec648.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [
+        {
+          "emoji": {
+            "id": null,
+            "name": "\uD83D\uDC4D",
+            "isAnimated": false,
+            "imageUrl": "https://twemoji.maxcdn.com/2/72x72/1f44d.png"
+          },
+          "count": 1
+        }
+      ],
+      "mentions": []
+    },
+    {
+      "id": "832245860862525510",
+      "type": "Default",
+      "timestamp": "2021-04-15T13:27:55.61+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "Hello, I'm trying to use the Token Mapper (testnet) to map an ERC20 contract deployed in Goerli. According to the documentation I dont even have to deploy it in the Mumbai network, I just need the token address in the Root Chain (goerli), go to the mapper app and just fill the address in... unfortunatelly I get an error:",
+      "author": {
+        "id": "377731880268595211",
+        "name": "Fede",
+        "discriminator": "2584",
+        "nickname": "Fede",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/embed/avatars/4.png"
+      },
+      "attachments": [
+        {
+          "id": "832245859604758558",
+          "url": "https://cdn.discordapp.com/attachments/781758240320389130/832245859604758558/unknown.png",
+          "fileName": "unknown.png",
+          "fileSizeBytes": 108450
+        }
+      ],
+      "embeds": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "832247421689659422",
+      "type": "Default",
+      "timestamp": "2021-04-15T13:34:07.74+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "Or maybe this is not the right place to ask this... ??",
+      "author": {
+        "id": "377731880268595211",
+        "name": "Fede",
+        "discriminator": "2584",
+        "nickname": "Fede",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/embed/avatars/4.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "832858865136697364",
+      "type": "Reply",
+      "timestamp": "2021-04-17T06:03:47.218+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "matic address is only optional for non-mintable type if i am not wrong.",
+      "author": {
+        "id": "370231100850831380",
+        "name": "cheapgemmer",
+        "discriminator": "2260",
+        "nickname": "Om Parikh",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/embed/avatars/0.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": [
+        {
+          "id": "377731880268595211",
+          "name": "Fede",
+          "discriminator": "2584",
+          "nickname": "Fede",
+          "isBot": false
+        }
+      ],
+      "reference": {
+        "messageId": "832245860862525510",
+        "channelId": "781758240320389130",
+        "guildId": "635865020172861441"
+      }
+    },
+    {
+      "id": "834001352190853120",
+      "type": "Reply",
+      "timestamp": "2021-04-20T09:43:37.358+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "I have the same problem, same error...  even with non mintable",
+      "author": {
+        "id": "231821820968435722",
+        "name": "zapaz",
+        "discriminator": "7734",
+        "nickname": "zapaz",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/231821820968435722/17e554e214fb470788b103c5c5ac52a2.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": [
+        {
+          "id": "377731880268595211",
+          "name": "Fede",
+          "discriminator": "2584",
+          "nickname": "Fede",
+          "isBot": false
+        }
+      ],
+      "reference": {
+        "messageId": "832245860862525510",
+        "channelId": "781758240320389130",
+        "guildId": "635865020172861441"
+      }
+    },
+    {
+      "id": "834002290628231218",
+      "type": "Default",
+      "timestamp": "2021-04-20T09:47:21.099+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "Hi,\n\nI tried to withdraw an ERC20 token.\n\nI executed the `withdraw` function from the Polygon network, see https://explorer-mainnet.maticvigil.com/tx/0xce3ea677d02c3c46a5833f5ef3f3c7dd3301c22fc4b6bf6170bc7486a03274d6/token-transfers .\n\nBut when I try to exit on Ethereum on https://etherscan.io/address/0xa0c68c638235ee32657e8f720a23cec1bfc77c77#writeProxyContract it cost more than 2 ETH \uD83D\uDE22  with this hash: 0xce3ea677d02c3c46a5833f5ef3f3c7dd3301c22fc4b6bf6170bc7486a03274d6\n\nIs it normal?",
+      "author": {
+        "id": "365832681277227009",
+        "name": "n1c0",
+        "discriminator": "1857",
+        "nickname": "n1c0",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/embed/avatars/2.png"
+      },
+      "attachments": [],
+      "embeds": [
+        {
+          "title": "Transaction 0xce3ea677d02c3c46a5833f5ef3f3c7dd3301c22fc4b6bf6170bc...",
+          "url": "https://explorer-mainnet.maticvigil.com/tx/0xce3ea677d02c3c46a5833f5ef3f3c7dd3301c22fc4b6bf6170bc7486a03274d6/token-transfers",
+          "timestamp": null,
+          "description": "View transaction 0xce3ea677d02c3c46a5833f5ef3f3c7dd3301c22fc4b6bf6170bc7486a03274d6 on Mainnet",
+          "color": "#FFFFFF",
+          "fields": []
+        },
+        {
+          "title": "Polygon (Matic): Bridge | 0xa0c68c638235ee32657e8f720a23cec1bfc77c77",
+          "url": "https://etherscan.io/address/0xa0c68c638235ee32657e8f720a23cec1bfc77c77",
+          "timestamp": null,
+          "description": "The Contract Address 0xa0c68c638235ee32657e8f720a23cec1bfc77c77 page allows users to view the source code, transactions, balances, and analytics for the contract address. Users can also interact and make transactions to the contract directly on Etherscan.",
+          "thumbnail": {
+            "url": "https://etherscan.io/images/brandassets/etherscan-logo-circle.jpg",
+            "width": 294,
+            "height": 294
+          },
+          "fields": []
+        }
+      ],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "834048633808748555",
+      "type": "Default",
+      "timestamp": "2021-04-20T12:51:30.174+00:00",
+      "timestampEdited": "2021-04-20T12:51:46.15+00:00",
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "solved! The error was the proof of burn is not the transaction id in this case I have to build it",
+      "author": {
+        "id": "365832681277227009",
+        "name": "n1c0",
+        "discriminator": "1857",
+        "nickname": "n1c0",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/embed/avatars/2.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "835149492621672530",
+      "type": "Default",
+      "timestamp": "2021-04-23T13:45:55.368+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "I see that zkp and optimism are planned for the future, is there any more information about implementation methods or projected releases for those services?",
+      "author": {
+        "id": "227158976297435138",
+        "name": "patmacs",
+        "discriminator": "8139",
+        "nickname": "patmacs",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/227158976297435138/a9a65d9a8dd3306eeff250b5cafed8ad.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [
+        {
+          "emoji": {
+            "id": null,
+            "name": "\uD83D\uDC4B",
+            "isAnimated": false,
+            "imageUrl": "https://twemoji.maxcdn.com/2/72x72/1f44b.png"
+          },
+          "count": 1
+        }
+      ],
+      "mentions": []
+    },
+    {
+      "id": "836727321515917362",
+      "type": "Reply",
+      "timestamp": "2021-04-27T22:15:39.091+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "It’s currently in private research right now. Happy to discuss more in DM on your plans.",
+      "author": {
+        "id": "806800019632947262",
+        "name": "Hamzah | Polygon",
+        "discriminator": "4832",
+        "nickname": "Hamzah | Polygon",
+        "color": "#3498DB",
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/806800019632947262/6c3c6149633144861568050ccf490032.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "reactions": [],
+      "mentions": [
+        {
+          "id": "227158976297435138",
+          "name": "patmacs",
+          "discriminator": "8139",
+          "nickname": "patmacs",
+          "isBot": false
+        }
+      ],
+      "reference": {
+        "messageId": "835149492621672530",
+        "channelId": "781758240320389130",
+        "guildId": "635865020172861441"
+      }
+    }
+  ],
+  "messageCount": 109
+}
