@@ -5,17 +5,18 @@ import simplejson as json
 test_text = 'src/test.txt'
 test_json = 'src/test.json'
 polygon_queries = 'src/Polygon_queries.txt'
-polygon_queries_json = 'src/Polygon_queries.json'
+polygon_queries_json = 'src/Polygon_oracles.json'
 
 
 
 with open(polygon_queries_json, encoding="utf8") as json_file:
     data = json.load(json_file)
+    print(type(data))
     #print(data['guild'])
     default_count = total = 0
     for default in data['messages']:
         total += 1
-        if default['type'] != "":
+        if default['type'] == "Default":
             default_count += 1
             print("Questions :")
             print('id: ' + default['id'])
